@@ -1,3 +1,5 @@
+miranda
+
 # Assignment 3 Part 2 - Create Your Own Chatbot
 
 In Assignment 3 you created a chatbot from a movie database. In this group project (no more than 4 people in a group, or you can work individually) you are tasked to create your own chatbot for something that is more relevant to you. You can use our solution as a starting point for your own chatbot, or you could do something completely different.
