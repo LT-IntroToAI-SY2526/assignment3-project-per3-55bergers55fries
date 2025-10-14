@@ -1,4 +1,4 @@
-from crumbl import crumbl_db
+from crumbl_db import crumbl_db
 from match import match 
 from typing import List, Tuple, Callable, Any
 
