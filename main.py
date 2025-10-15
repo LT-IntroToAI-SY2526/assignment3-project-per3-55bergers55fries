@@ -1,6 +1,7 @@
 from crumbl_db import crumbl_db
 from match import match 
 from typing import List, Tuple, Callable, Any
+import random
 
 def get_day(crumb):
     return crumb[0]
@@ -8,71 +9,48 @@ def get_day(crumb):
 def get_cookie(crumb):
     return crumb[1]
 
-def get_monday_cookie(matches):
+def get_day_cookie(matches):
     day = matches[0]
     result = []
     for crumb in crumbl_db:
-        if get_day(crumb) == "Monday":
+        if get_day(crumb) == day:
             result.append(get_cookie(crumb))
     return result
 
-def get_tuesday_cookie(matches):
-    day = matches[0]
-    result = []
-    for crumb in crumbl_db:
-        if get_day(crumb) == "Tuesday":
-            result.append(get_cookie(crumb))
-    return result
-
-def get_wednesday_cookie(matches):
-    day = matches[0]
-    result = []
-    for crumb in crumbl_db:
-        if get_day(crumb) == "Wednesday":
-            result.append(get_cookie(crumb))
-    return result
-
-def get_thursday_cookie(matches):
-    day = matches[0]
-    result = []
-    for crumb in crumbl_db:
-        if get_day(crumb) == "Thursday":
-            result.append(get_cookie(crumb))
-    return result
-
-def get_friday_cookie(matches):
-    day = matches[0]
-    result = []
-    for crumb in crumbl_db:
-        if get_day(crumb) == "Friday":
-            result.append(get_cookie(crumb))
-    return result
-
-def get_saturday_cookie(matches):
-    day = matches[0]
-    result = []
-    for crumb in crumbl_db:
-        if get_day(crumb) == "Saturday":
-            result.append(get_cookie(crumb))
-    return result
-
-def get_sunday_cookie(matches):
-    day = matches[0]
-    result = []
-    for crumb in crumbl_db:
-        if get_day(crumb) == "Sunday":
-            result.append(get_cookie(crumb))
-    return result
 def get_next_week_lineup(matches):
     run = matches[0]
     result = []
     for crumb in crumbl_db:
         if get_day(crumb) == "Next Week":
             result.append(get_cookie(crumb))
+    return result
 
+def get_cookie_availability(matches):
+    cookie = matches[0]
+    available = False
+    result = []
+    for crumb in crumbl_db:
+        if get_cookie(crumb) == cookie:
+            available = True
+            break
+    if available:
+        result.append("Yes")
+    else:
+        result.append("No")
+    return result
+
+
+def get_random_cookie(matches):
+    run = matches[0]
+    result = []
+    rand = random.randint(0, 5)
+    result.append(crumbl_db[rand][1])
+    return result
 pa_list: List[Tuple[List[str], Callable[[List[str]], List[Any]]]] = [
     (str.split("what is the cookie lineup for %"), get_next_week_lineup),
-    (str.split("what cookie do they serve on _"))
+    (str.split("what cookie do they serve on _"), get_day_cookie),
+    (str.split("give me a random cookie"), get_random_cookie),
+    (str.split("do you have %"), get_cookie_availability),
 ]
 def search_pa_list(src):
     
