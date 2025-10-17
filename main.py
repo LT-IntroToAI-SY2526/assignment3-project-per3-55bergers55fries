@@ -73,3 +73,50 @@ def search_pa_list(src):
             answer = act(mat)
             return answer if answer else ["No answers']"]
     return ["I don't understand"]   
+
+if __name__ == "__main__":
+    # Test get_day and get_cookie helper functions
+    assert isinstance(get_day(crumbl_db[0]), str), "get_day not returning a string"
+    assert get_day(crumbl_db[0]) == "Monday", "failed get_day test for Monday"
+    
+    assert isinstance(get_cookie(crumbl_db[0]), list), "get_cookie not returning a list"
+    assert get_cookie(crumbl_db[0]) == ["Dubai chocolate brownie"], "failed get_cookie test"
+    
+    assert get_day(crumbl_db[6]) == "Sunday", "failed get_day test for Sunday"
+
+    # Test get_day_cookie
+    assert isinstance(get_day_cookie(["Monday"]), list), "get_day_cookie not returning a list"
+    assert get_day_cookie(["Monday"]) == [["Dubai chocolate brownie"]], "failed get_day_cookie test for Monday"
+    assert get_day_cookie(["Tuesday"]) == [["Biscoff tres leches"]], "failed get_day_cookie test for Tuesday"
+    assert get_day_cookie(["Sunday"]) == [["Crumble is closed!!!"]], "failed get_day_cookie test for Sunday"
+    assert get_day_cookie(["Nonexistent"]) == [], "failed get_day_cookie test for nonexistent day"
+
+    # Test get_cookie_availability
+    assert isinstance(get_cookie_availability(["brownie"]), list), "get_cookie_availability not returning a list"
+    assert get_cookie_availability(["brownie"]) == ["Yes"], "failed get_cookie_availability test for brownie"
+    assert get_cookie_availability(["Brownie"]) == ["Yes"], "failed get_cookie_availability test for Brownie (case insensitive)"
+    assert get_cookie_availability(["chocolate"]) == ["Yes"], "failed get_cookie_availability test for chocolate"
+    assert get_cookie_availability(["pizza"]) == ["No"], "failed get_cookie_availability test for pizza"
+    assert get_cookie_availability(["Dubai"]) == ["Yes"], "failed get_cookie_availability test for Dubai"
+
+    # Test get_cookie_day
+    assert isinstance(get_cookie_day(["brownie"]), list), "get_cookie_day not returning a list"
+    assert sorted(get_cookie_day(["brownie"])) == sorted(["Monday", "Thursday"]), "failed get_cookie_day test for brownie"
+    assert sorted(get_cookie_day(["chocolate"])) == sorted(["Monday", "Wednesday"]), "failed get_cookie_day test for chocolate"
+    assert get_cookie_day(["pizza"]) == ["Sorry we don't have that cookie on any day"], "failed get_cookie_day test for pizza"
+    assert "Monday" in get_cookie_day(["Dubai"]), "failed get_cookie_day test for Dubai"
+
+    # Test get_random_cookie
+    result = get_random_cookie([""])
+    assert isinstance(result, list), "get_random_cookie not returning a list"
+    assert len(result) == 1, "failed get_random_cookie test - should return exactly one cookie"
+    assert result[0] in [crumbl_db[i][1] for i in range(6)], "failed get_random_cookie test - cookie not in valid range"
+    assert result[0] != ["Crumble is closed!!!"], "failed get_random_cookie test - should not return Sunday"
+
+    # Test get_next_week_lineup
+    assert isinstance(get_next_week_lineup([""]), list), "get_next_week_lineup not returning a list"
+
+    # Test search_pa_list
+
+
+    print("All tests passed! ✅")
