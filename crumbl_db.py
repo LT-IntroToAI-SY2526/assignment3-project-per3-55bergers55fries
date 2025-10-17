@@ -30,4 +30,15 @@ crumbl_db: List[Tuple[str, List[str]]] = [
         "Sunday",
         ["Crumble is closed!!!"],
     ),
+    (
+        "Next Week",
+        [
+         "Pink sugarcookie",
+         "Triple berry shortcake",
+         "Benson Boone Moonbeam Ice Cream",
+         "Oreo Cheesecake",
+         "Blue Monster",
+         "Brookie", 
+        ],
+    ),
 ]
